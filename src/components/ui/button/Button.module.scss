@@ -1,0 +1,7 @@
+@use '@/styles/helpers' as *;
+
+.button {
+    background-color: var(--dark-red);
+    padding: rem(10) rem(26);
+    border-radius: var(--border-radius);
+}

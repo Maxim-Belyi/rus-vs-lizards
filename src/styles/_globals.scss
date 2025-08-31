@@ -1,0 +1,15 @@
+@use './helpers' as *;
+a,
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+  color: var(--black);
+}
+
+h1 {
+  font-size: rem(48);
+  letter-spacing: rem(6);
+  padding: rem(20);
+}

@@ -1,0 +1,49 @@
+@use 'sass:math';
+@use './functions' as*;
+
+@mixin fluid-text($max: 48, $min: 16) {
+  font-size: fluid($max, $min);
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+@mixin cards-after {
+  position: absolute;
+  top: fluid(156, 64);
+  left: rem(27);
+  font-family: var(--font-family-bodony);
+  font-size: fluid(65, 24);
+  color: var(--color-red-light);
+}
+
+@mixin cards-before {
+  position: absolute;
+  font-weight: 400;
+  font-size: fluid(60, 24);
+  font-family: var(--font-family-bodony);
+  top: fluid(243, 64);
+  left: rem(17);
+  z-index: 1;
+  text-shadow: var(--text-shadow);
+}
+
+@mixin cards-before-tablet {
+  top: fluid(260, 180);
+  left: fluid(620, 20);
+}
+
+@mixin cards-after-tablet {
+  top: fluid(240, 140);
+  left: fluid(620, 20);
+}

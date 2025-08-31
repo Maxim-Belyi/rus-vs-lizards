@@ -1,0 +1,5 @@
+.button {
+  background-color: var(--dark-red);
+  padding: 0.625rem 1.625rem;
+  border-radius: var(--border-radius);
+}/*# sourceMappingURL=Button.module.css.map */
