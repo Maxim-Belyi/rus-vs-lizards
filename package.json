@@ -4,6 +4,12 @@
   "version": "0.0.0",
   "homepage": "https://maxim-belyi.github.io/rus-vs-lizards/",
   "type": "module",
+
+   "author": { 
+    "name": "Maxim Belyi",
+    "url": "https://github.com/maxim-belyi",
+    "email": "btf9458@gmail.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -13,6 +19,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.1",
+    "motion": "^12.23.12",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "sass-embedded": "^1.90.0",

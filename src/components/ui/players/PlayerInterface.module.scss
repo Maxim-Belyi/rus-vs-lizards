@@ -1,0 +1,86 @@
+@use "@/styles/helpers" as *;
+
+.playerRus {
+  position: absolute;
+  left: 6%;
+  bottom: -5%;
+  width: fluid(360, 120);
+  height: fluid(360, 120);
+  background: url("@assets/frame-rusy.avif") center/cover no-repeat;
+}
+.playerLizard {
+  position: absolute;
+  left: 7%;
+  top: -2%;
+  width: fluid(340, 110);
+  height: fluid(340, 110);
+  background: url("@assets/frame-lizard.avif") center/cover no-repeat;
+  
+}
+
+.nameRus {
+  position: absolute;
+  color: var(--dark-red-accent);
+  text-shadow: var(--text-shadow);
+  font-size: fluid(26, 12);
+  bottom: 20%;
+  left: 35%;
+}
+
+.nameLizard {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-size: fluid(26, 12);
+  bottom: 17%;
+  left: 28%;
+  padding-inline: rem(8);
+  background-color: #9a7d5da2;
+  border-radius: var(--border-radius);
+}
+
+.health {
+  position: absolute;
+  border-radius: 50%;
+  font-size: fluid(46, 14);
+  font-weight: 700;
+}
+
+.healthLizard {
+  color: var(--dark-red);
+  bottom: 20%;
+  right: 15%;
+  text-shadow: var(--text-shadow);
+}
+
+.healthRus {
+  color: var(--dark-red-accent);
+  right: 17%;
+  bottom: 23%;
+  text-shadow: var(--text-shadow);
+}
+
+.mana {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: var(--dark-red-accent);
+  text-shadow: var(--text-shadow);
+  position: absolute;
+  font-weight: bold;
+  font-size: fluid(46, 14);
+  width: fluid(94, 22);
+  height: fluid(94, 22);
+  border-radius: 50%;
+  background: url("@assets/mana-bottle.avif") center/cover no-repeat;
+}
+
+.manaRus {
+  top: 11%;
+  left: 6%;
+}
+
+.manaLizard {
+  top: 7%;
+  left: 1%;
+}

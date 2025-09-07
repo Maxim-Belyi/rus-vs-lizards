@@ -1,25 +1,27 @@
-@use './helpers' as *;
+@use "./helpers" as *;
 
 :root {
-    --container-width: 1920px;
-    --transition-duration: 0.3s;
-    --container-padding-x: 24px;
+  --container-width: 1920px;
+  --transition-duration: 0.4s;
+  --container-padding-x: 5px;
 
-    --grey: #808080;
-    --black: #000000;
-    --blue: #DEF7FE;
-    --pink: #fadadd;
-    --purple: #ccccff;
-    --white: #f5f5f5;
-    --dark-red: #880808;
+//   --grey: #808080;
+  --black: #000000;
+//   --blue: #def7fe;
+//   --pink: #fadadd;
+//   --purple: #ccccff;
+//   --white: #f5f5f5;
+  --dark-red: #880808;
+  --dark-red-accent: #1a0e0e;
 
-    --border-radius: 8px;
+  --border-radius: 8px;
 
-    --ff-main: 'Bangers', sans-serif;
-    --ff-accent: 'Roboto', sans-serif;
+  --ff-main: "Slavic", sans-serif;
 
-    --border: 2px solid var(--black);
-    --transition: all var(--transition-duration) ease-in-out;
-    --transition-dropdown: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  --button-shadow: 0px 8px 6px rgba(0, 0, 0, 0.6);
 
+  --text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2); ;
+  --border: 2px solid var(--black);
+  --transition: all var(--transition-duration) ease-in-out;
+  --transition-dropdown: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 }

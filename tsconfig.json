@@ -6,12 +6,12 @@
   ],
 
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@styles/*": ["src/styles/*"],
-      "@": ["src/*"]
+      "@components/*": ["/src/components/"],
+      "@assets/*": ["/public/assets/"],
+      "@styles/*": ["/src/styles/"],
+      "@": ["src/"]
     }
   }
 }

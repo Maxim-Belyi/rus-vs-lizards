@@ -1,16 +1,15 @@
 @font-face {
-  font-family: 'Bangers';
-  src: url('./fonts/bangers-regular.woff2') format('woff2');
-  font-weight: 500;
+  font-family: "Shafarik";
+  src: url("./fonts/Shafarik-Regular.woff2") format("woff2");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('./fonts/Roboto-Regular.woff2') format('woff2');
+  font-family: "Slavic";
+  src: url("./fonts/Slavic.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
-

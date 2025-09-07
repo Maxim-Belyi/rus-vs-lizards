@@ -8,14 +8,15 @@ export interface IGameCard extends ICard {
   isCanAttack: boolean;
   isFastAttack: boolean;
 }
-
 export interface IHero {
   deck: IGameCard[];
+  hand: IGameCard[];
+  field: IGameCard[];
   health: number;
   mana: number;
 }
-
 export interface IGameStore {
+  isGameStarted: boolean;
   player: IHero;
   opponent: IHero;
   currentTurn: TPlayer;

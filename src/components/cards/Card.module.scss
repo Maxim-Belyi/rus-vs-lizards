@@ -1,0 +1,39 @@
+@use "@/styles/helpers" as *;
+
+.card {
+  width: fluid(160, 60);
+  height: fluid(160, 60);
+  border-radius: var(--border-radius);
+  background: transparent;
+}
+
+.cardRusy {
+  &:hover {
+    transform: translateY(rem(-160)) scale(1.5);
+    z-index: 1;
+  }
+}
+
+.wrapperLizard {
+  display: flex;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: rem(100);
+}
+
+.wrapperLizard {
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wrapperRus {
+  position: absolute;
+  bottom: -4%;
+  left: 50%;
+  transform: translateX(-50%);
+}

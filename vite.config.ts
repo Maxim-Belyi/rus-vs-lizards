@@ -5,11 +5,12 @@ import path from 'path'
 const resolvePath = (p: string) => path.resolve(__dirname, p);
 
 export default defineConfig({
+  base: '/rus-vs-lizards/',
   plugins: [react()],
   resolve: {
     alias: {
       '@components': resolvePath('./src/components'),
-      '@assets': resolvePath("./src/assets"),
+      '@assets': resolvePath("./public/assets"),
       '@styles': resolvePath("./src/styles"),
       "@": resolvePath("./src")
     },

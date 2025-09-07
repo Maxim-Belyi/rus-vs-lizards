@@ -1,8 +1,8 @@
 import type { IGameCard, IGameStore, TPlayer } from "../game.types";
+import { maxMana } from "../../constants/constants";
 
-const maxMana: number = 6;
 
-const getNewMana = (newTurn: TPlayer, currentMana: number) => {
+const getNewMana = (newTurn: TPlayer, currentMana:number) => {
   return newTurn === "player"
     ? Math.min(currentMana + 1, maxMana)
     : currentMana;

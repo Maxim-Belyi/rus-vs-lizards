@@ -1,20 +1,37 @@
-import type { IGameStore } from "../game.types";
+import type { IGameCard, IGameStore } from "../game.types";
 
 export const PlayCardAction = (
   state: IGameStore,
   cardId: number
 ): Partial<IGameStore> => {
-  const isPlayerTurn = state.currentTurn === "player";
-  const currentPlayer = isPlayerTurn ? state.player : state.opponent;
+  const currentPlayerKey =
+    state.currentTurn === "player" ? "player" : "opponent";
+  const currentPlayerObject = state[currentPlayerKey];
 
-  const currentCard = currentPlayer.deck.find((card) => card.id === cardId);
+  const cardToPlay = currentPlayerObject.hand.find(
+    (card: IGameCard) => card.id === cardId
+  );
 
-  if (currentCard && currentPlayer.mana >= currentCard?.mana) {
-    currentCard.isOnBoard = true;
-    currentPlayer.mana -= currentCard.mana;
+  if (!cardToPlay) {
+    alert(`Карта с id: ${cardId} не найдена в руке игрока ${currentPlayerKey}`);
+    return {};
   }
 
-  return isPlayerTurn
-    ? { player: { ...currentPlayer, deck: currentPlayer.deck } }
-    : { opponent: currentPlayer };
+  if (currentPlayerObject.mana < cardToPlay.mana) {
+    alert("Недостаточно маны!");
+    return {};
+  }
+
+
+  const newHand = currentPlayerObject.hand.filter((card) => card.id !== cardId);
+  const newField = [...currentPlayerObject.field, cardToPlay];
+
+  const updatedPlayer = {
+    ...currentPlayerObject,
+    hand: newHand,
+    field: newField,
+    mana: currentPlayerObject.mana - cardToPlay.mana,
+  };
+
+  return { [currentPlayerKey]: updatedPlayer };
 };
