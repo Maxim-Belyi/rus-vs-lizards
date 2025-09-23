@@ -1,12 +1,11 @@
-import { CARDS } from "../constants/cards.constants";
+import type { ICard } from "../constants/cards.types";
 import type { IGameCard } from "../store/game.types";
 
-export function createDeck(): IGameCard[] {
-  return CARDS.map((card, index) => ({
+export function createDeck(cardSet: ICard[]): IGameCard[] {
+  return cardSet.map((card, index) => ({
     ...card,
-    id: index + 1,
+    id: index + 100,
     isOnBoard: false,
     isCanAttack: false,
-    isFastAttack: false
   }));
 }

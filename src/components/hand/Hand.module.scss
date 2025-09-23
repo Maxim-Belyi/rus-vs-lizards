@@ -1,0 +1,23 @@
+@use "@/styles/helpers" as *;
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: rem(100);
+}
+
+.wrapperLizard {
+  display: flex;
+  position: absolute;
+  top: -14%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wrapperRus {
+  position: absolute;
+  bottom: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}

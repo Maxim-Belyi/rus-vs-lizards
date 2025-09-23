@@ -1,0 +1,19 @@
+@use "@/styles/helpers" as *;
+
+.fieldContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fieldContainerRus {
+  position: absolute;
+  bottom: 18%;
+  transform: translate(-50%, -50%);
+}
+
+.fieldContainerLizard {
+  position: absolute;
+  top: 28%;
+  transform: translate(-50%, -50%);
+}

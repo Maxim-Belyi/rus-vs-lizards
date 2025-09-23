@@ -1,0 +1,20 @@
+@use "@/styles/helpers" as *;
+
+.bubble {
+  position: absolute;
+  bottom: 25%;
+  left: 4%;
+  transform: translate(-50%, -50%);
+  padding: fluid(12, 8) fluid(20, 12);
+  background-color: var(--white);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  font-size: fluid(20, 12);
+  text-shadow: var(--text-shadow);
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  color: var(--red-accent);
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}

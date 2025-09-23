@@ -5,7 +5,7 @@ import path from 'path'
 const resolvePath = (p: string) => path.resolve(__dirname, p);
 
 export default defineConfig({
-  base: '/rus-vs-lizards/',
+  base: '',
   plugins: [react()],
   resolve: {
     alias: {

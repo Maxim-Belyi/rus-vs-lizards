@@ -1,4 +1,4 @@
-import { EnumTypeCard } from "../../constants/constants";
+import { EnumTypeCard } from "./constants";
 
 export type EnumTypeCard = (typeof EnumTypeCard)[keyof typeof EnumTypeCard];
 

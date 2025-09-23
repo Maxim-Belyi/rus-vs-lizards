@@ -1,4 +1,4 @@
-@use './helpers' as *;
+@use "./helpers" as *;
 .container {
   max-width: var(--container-width);
   margin-inline: auto;
@@ -18,4 +18,3 @@
     display: none !important;
   }
 }
-

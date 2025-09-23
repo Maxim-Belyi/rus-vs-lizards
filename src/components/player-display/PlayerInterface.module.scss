@@ -2,20 +2,20 @@
 
 .playerRus {
   position: absolute;
-  left: 6%;
+  left: 0%;
   bottom: -5%;
   width: fluid(360, 120);
   height: fluid(360, 120);
   background: url("@assets/frame-rusy.avif") center/cover no-repeat;
 }
+
 .playerLizard {
   position: absolute;
-  left: 7%;
+  left: 0%;
   top: -2%;
-  width: fluid(340, 110);
-  height: fluid(340, 110);
+  width: fluid(340, 120);
+  height: fluid(340, 120);
   background: url("@assets/frame-lizard.avif") center/cover no-repeat;
-  
 }
 
 .nameRus {
@@ -24,7 +24,7 @@
   text-shadow: var(--text-shadow);
   font-size: fluid(26, 12);
   bottom: 20%;
-  left: 35%;
+  left: 34%;
 }
 
 .nameLizard {
@@ -49,13 +49,13 @@
 .healthLizard {
   color: var(--dark-red);
   bottom: 20%;
-  right: 15%;
+  right: 17%;
   text-shadow: var(--text-shadow);
 }
 
 .healthRus {
   color: var(--dark-red-accent);
-  right: 17%;
+  right: 18%;
   bottom: 23%;
   text-shadow: var(--text-shadow);
 }

@@ -1,114 +1,107 @@
 import { useGameStore } from "../store/game.store";
-import { maxCardsOnHand, rotateMultiplier } from "../constants/constants";
-import Card from "@components/cards/card.module.scss";
-import PlayerInterface from "@components/ui/players/PlayerInterface.module.scss";
-import Field from '@components/ui/field/Field.module.scss'
+import { PlayerDisplay } from "../components/player-display/PlayerDisplay";
+import { Hand } from "../components/hand/Hand";
+import { Field } from "../components/field/Field";
+import Button from "../components/button/Button.module.scss";
+import {NotificationBubble} from "../components/notification-bubble/NotificationBubble.js"
 
 export function GameBoard() {
-  const { player, opponent, playCard } = useGameStore();
-  console.log("Player Render", player);
+  const {
+    player,
+    opponent,
+    shakingHero,
+    currentTurn,
+    selectedCardId,
+    shakingCardId,
+    playCard,
+    endTurn,
+    attackHero,
+    setSelectedCard,
+    attackCard,
+    setShakingHero,
+    setShakingCard,
+    notification,
+  } = useGameStore();
 
-  const calculateRotationOpponent = (index: number, total: number) => {
-    const middle = (total - 1) / 2;
-    return -(index - middle) * rotateMultiplier;
+  const handleHeroAttack = () => {
+    if (currentTurn !== "player" || !selectedCardId) return;
+
+    setShakingHero("opponent");
+    setTimeout(() => setShakingHero(null), 500);
+
+    attackHero(selectedCardId);
+    setSelectedCard(null);
   };
 
-  const calculateRotationPlayer = (index: number, total: number) => {
-    const middle = (total - 1) / 2;
-    return (index - middle) * rotateMultiplier;
+  const handleFieldCardClick = (
+    clickedCardId: number,
+    isPlayerCard: boolean
+  ) => {
+    console.log(`ID: ${clickedCardId}, игрок ${isPlayerCard}`);
+    if (currentTurn !== "player") return;
+
+    if (isPlayerCard) {
+      setSelectedCard(clickedCardId);
+    } else {
+      if (selectedCardId) {
+        setShakingCard(clickedCardId);
+        setTimeout(() => setShakingCard(null), 500)
+
+        attackCard(selectedCardId, clickedCardId);
+        setSelectedCard(null);
+      }
+    }
   };
 
   return (
-    
-    <div>
+    <>
+    <NotificationBubble message={notification} />
+      {/* --- оппонент --- */}
       <section>
-        <div className={`${PlayerInterface.playerLizard}`}>
-          <p className={`${PlayerInterface.nameLizard}`}>Молотопуз</p>
-          <p
-            className={`${PlayerInterface.health} ${PlayerInterface.healthLizard}`}
-          >
-            {opponent.health}
-          </p>
-          <p
-            className={`${PlayerInterface.mana} ${PlayerInterface.manaLizard}`}
-          >
-            {opponent.mana}
-          </p>
-        </div>
-
-        <div className={`${Card.wrapper} ${Card.wrapperLizard}`}>
-          {opponent.deck
-            .filter((card) => !card.isOnBoard)
-            .slice(0, maxCardsOnHand)
-            .map((card, index, array) => (
-              <button className={`${Card.card}`} key={card.id}>
-                <img
-                  src={card.imageUrl}
-                  alt={card.name}
-                  style={{
-                    transform: `rotate(${calculateRotationOpponent(
-                      index,
-                      array.length
-                    )}deg)`,
-                  }}
-                />
-              </button>
-            ))}
-        </div>
-        <div className={`${Field.fieldContainer}`}>
-          {opponent.field.map((card) => (
-            <div className={`${Card.cardOnBoard}`} key={card.id}>
-              <img src={card.imageUrl} alt={card.name} />
-            </div>
-          ))}
-        </div>
+        <PlayerDisplay
+          player={opponent}
+          isOpponent={true}
+          onHeroClick={handleHeroAttack}
+          isShaking={shakingHero === "opponent"}
+        />
+        <Hand cards={opponent.hand} isOpponent={true} />
+        <Field
+          isOpponent={true}
+          cards={opponent.field}
+          selectedCardId={null}
+          shakingCardId={shakingCardId}
+          onCardClick={(cardId) => handleFieldCardClick(cardId, false)}
+        />
       </section>
 
-      <hr />
+      {/* --- кнопка --- */}
+      <div className={`${Button.endTurnWrapper}`}>
+        <button
+          className={`${Button.buttonRed} ${Button.endTurnButton}`}
+          onClick={endTurn}
+          disabled={currentTurn !== "player"}
+        >
+          Завершить ход
+        </button>
+      </div>
 
+      {/* --- игрок --- */}
       <section>
-        <div className={`${PlayerInterface.playerRus}`}>
-          <p className={`${PlayerInterface.nameRus}`}>Парослав</p>
-          <p
-            className={`${PlayerInterface.health} ${PlayerInterface.healthRus}`}
-          >
-            {player.health}
-          </p>
-          <p className={`${PlayerInterface.mana} ${PlayerInterface.manaRus}`}>
-            {player.mana}
-          </p>
-        </div>
-
-        <div className={`${Card.wrapper} ${Card.wrapperRus}`}>
-          {player.hand.map((card, index, array) => (
-            <button
-              className={`${Card.card} ${Card.cardRusy}`}
-              key={card.id}
-              onClick={() => playCard(card.id)}
-            >
-              <img
-                src={card.imageUrl}
-                alt={card.name}
-                style={{
-                  transform: `rotate(${calculateRotationPlayer(
-                    index,
-                    array.length
-                  )}deg)`,
-                }}
-              />
-            </button>
-          ))}
-        </div>
-
-        <div className={`${Field.fieldContainer}`}>
-          {player.field.map((card) => (
-            <button className={`${Card.cardOnBoard} ${Card.card}`} key={card.id}>
-              <img 
-              src={card.imageUrl} alt={card.name} />
-            </button>
-          ))}
-        </div>
+        
+        <PlayerDisplay
+          player={player}
+          isOpponent={false}
+          isShaking={shakingHero === "player"}
+        />
+        <Field
+          isOpponent={false}
+          cards={player.field}
+          selectedCardId={selectedCardId}
+          onCardClick={(cardId) => handleFieldCardClick(cardId, true)}
+          shakingCardId={shakingCardId}
+        />
+        <Hand cards={player.hand} isOpponent={false} onCardClick={playCard} />
       </section>
-    </div>
+    </>
   );
 }

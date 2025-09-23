@@ -1,41 +1,62 @@
-import type { IGameCard, IGameStore, TPlayer } from "../game.types";
-import { maxMana } from "../../constants/constants";
+import type { IGameStore, TPlayer } from "../game.types";
+import {
+  maxMana,
+  startingMana,
+  cardToHandPerTurn,
+} from "../../constants/constants";
+import { refreshCardsOnField } from "./refresh-cards-on-field";
+import { drawCardsAction } from "./draw-cards";
 
-
-const getNewMana = (newTurn: TPlayer, currentMana:number) => {
-  return newTurn === "player"
-    ? Math.min(currentMana + 1, maxMana)
-    : currentMana;
-};
-
-const resetAttack = (deck: IGameCard[]) =>
-  deck.map((card) => ({
-    ...card,
-    isCanAttack: card.isOnBoard || card.isFastAttack,
-  }));
-
-export const endTurnAction = (get: () => IGameStore): Partial<IGameStore> => {
-  const state = get();
-
+export const endTurnAction = (state: IGameStore): Partial<IGameStore> => {
   const newTurn: TPlayer =
     state.currentTurn === "player" ? "opponent" : "player";
 
-  const newPlayerMana = getNewMana("player", state.player.mana);
+  const newTurnNumber =
+    newTurn === "player" ? state.turnNumber + 1 : state.turnNumber;
 
-  const newOpponentMana = getNewMana("opponent", state.opponent.mana);
+  let playerAfterDraw = state.player;
+  let opponentAfterDraw = state.opponent;
+
+  if (newTurn === "player") {
+    playerAfterDraw = drawCardsAction(state.player, cardToHandPerTurn);
+  } else {
+    opponentAfterDraw = drawCardsAction(state.opponent, cardToHandPerTurn);
+  }
+
+  const newPlayerMana =
+    newTurn === "player"
+      ? Math.min(startingMana + newTurnNumber, maxMana)
+      : state.player.mana;
+
+  const newOpponentMana =
+    newTurn === "opponent"
+      ? Math.min(startingMana + newTurnNumber, maxMana)
+      : state.opponent.mana;
+
+  const refreshedPlayerField =
+    newTurn === "player"
+      ? refreshCardsOnField(state.player.field)
+      : state.player.field;
+
+  const refreshedOpponentField =
+    newTurn === "opponent"
+      ? refreshCardsOnField(state.opponent.field)
+      : state.opponent.field;
 
   return {
     currentTurn: newTurn,
+    turnNumber: newTurnNumber,
     player: {
-      ...state.player,
+      ...playerAfterDraw,
       mana: newPlayerMana,
-      deck: resetAttack(state.player.deck),
+      // deck: resetAttack(state.player.deck),
+      field: refreshedPlayerField,
     },
-
     opponent: {
-      ...state.opponent,
+      ...opponentAfterDraw,
       mana: newOpponentMana,
-      deck: resetAttack(state.opponent.deck),
+      // deck: resetAttack(state.opponent.deck),
+      field: refreshedOpponentField,
     },
   };
 };

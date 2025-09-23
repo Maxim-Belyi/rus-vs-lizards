@@ -1,4 +1,5 @@
 import type { IGameCard, IGameStore } from "../game.types";
+import { EnumTypeCard } from "../../constants/constants";
 
 export const PlayCardAction = (
   state: IGameStore,
@@ -18,13 +19,16 @@ export const PlayCardAction = (
   }
 
   if (currentPlayerObject.mana < cardToPlay.mana) {
-    alert("Недостаточно маны!");
     return {};
   }
 
-
   const newHand = currentPlayerObject.hand.filter((card) => card.id !== cardId);
-  const newField = [...currentPlayerObject.field, cardToPlay];
+  const cardReadyForField = {
+    ...cardToPlay,
+    isCanAttack: cardToPlay.type === EnumTypeCard.FAST_ATTACK,
+  }
+
+  const newField = [...currentPlayerObject.field, cardReadyForField];
 
   const updatedPlayer = {
     ...currentPlayerObject,

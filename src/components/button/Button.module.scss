@@ -1,0 +1,47 @@
+@use "@/styles/helpers" as *;
+
+.buttonRed {
+  background-color: var(--dark-red);
+  padding: rem(10) rem(26);
+  border-radius: var(--border-radius);
+  box-shadow: var(--button-shadow);
+  letter-spacing: 1.1px;
+  font-size: rem(32);
+
+  &:hover {
+    scale: 1.05;
+  }
+}
+
+.endTurnWrapper {
+  position: absolute;
+  right: rem(36);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.endTurnButton {
+  font-size: fluid(22, 14);
+  max-width: fluid(140, 80);
+  font-weight: 500;
+  white-space: wrap;
+  padding: rem(10) fluid(26, 18);
+  box-shadow: 0 5px 0 var(--dark-red-alt), 0 6px 12px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 var(--dark-red-alt), 0 8px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active {
+    transform: translateY(6px);
+  }
+
+  &:disabled {
+    background-color: var(--grey);
+    color: var(--grey-alt);
+    transform: translateY(4px);
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}

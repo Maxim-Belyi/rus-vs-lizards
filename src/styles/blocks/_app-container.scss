@@ -1,7 +1,8 @@
-@use '../helpers' as *;
+@use "../helpers" as *;
 
 .app-container {
   display: flex;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
   margin-inline: auto;
@@ -9,5 +10,5 @@
   height: 100vh;
   font-family: var(--ff-main);
   background-color: var(--blue);
-  background: url('@/assets/background_desk.avif') center/cover no-repeat;
+  background: url("@/assets/background_desk.avif") center/cover no-repeat;
 }

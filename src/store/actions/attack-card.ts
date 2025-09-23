@@ -1,38 +1,60 @@
-import type { IGameCard, IGameStore } from "../game.types";
-
-export const getCardById = (cardId: number, deck: IGameCard[]) =>
-  deck.find((card) => card.id === cardId);
+import { EnumTypeCard } from "../../constants/constants";
+import type { IGameStore } from "../game.types";
 
 export const attackCardAction = (
   state: IGameStore,
   attackerId: number,
   targetId: number
-) => {
-  const isAttackerPlayer = state.currentTurn === "player";
-  const attacker = isAttackerPlayer
-    ? getCardById(attackerId, state.player.deck)
-    : getCardById(attackerId, state.opponent.deck);
+): Partial<IGameStore> => {
+  const isPlayerTurn = state.currentTurn === "player";
+  const attackerPlayerKey = isPlayerTurn ? "player" : "opponent";
+  const defenderPlayerKey = isPlayerTurn ? "opponent" : "player";
 
-  const target = isAttackerPlayer
-    ? getCardById(targetId, state.opponent.deck)
-    : getCardById(targetId, state.player.deck);
+  const attackerPlayer = state[attackerPlayerKey];
+  const defenderPlayer = state[defenderPlayerKey];
 
-  if (attacker && target && attacker.isCanAttack) {
-    target.health -= attacker.attack;
-    attacker.isCanAttack = false;
+  const attacker = attackerPlayer.field.find((card) => card.id === attackerId);
+  const target = defenderPlayer.field.find((card) => card.id === targetId);
 
-    if (target.health <= 0) {
-      if (isAttackerPlayer) {
-        state.opponent.deck = state.opponent.deck.filter(
-          (card) => card.id !== targetId
-        );
-      } else {
-        state.player.deck = state.player.deck.filter(
-          (card) => card.id !== targetId
-        );
-      }
-    }
+  if (!attacker || !target) {
+    console.error(
+      `Атакующий (id: ${attackerId}) или цель (id: ${targetId}) не найдены`
+    );
+    return {};
   }
 
-  return { player: state.player, opponent: state.opponent };
+  if (!attacker.isCanAttack) {
+    console.error(`Карта ${attacker.name} уже атаковала на этом ходу`);
+    return {};
+  }
+
+  target.health -= attacker.attack;
+  if (attacker.type !== EnumTypeCard.RANGE_ATTACK) {
+    attacker.health -= target.attack;
+  }
+
+  const finalAttackerField = attackerPlayer.field
+    .map((card) =>
+      card.id === attackerId
+        ? { ...card, isCanAttack: false, health: attacker.health }
+        : card
+    )
+    .filter((card) => card.health > 0);
+
+  const finalDefenderField = defenderPlayer.field
+    .map((card) =>
+      card.id === targetId ? { ...card, health: target.health } : card
+    )
+    .filter((card) => card.health > 0);
+
+  return {
+    [attackerPlayerKey]: {
+      ...attackerPlayer,
+      field: finalAttackerField,
+    },
+    [defenderPlayerKey]: {
+      ...defenderPlayer,
+      field: finalDefenderField,
+    },
+  };
 };

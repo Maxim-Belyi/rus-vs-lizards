@@ -1,0 +1,98 @@
+import type { ICard } from "./cards.types";
+import { EnumTypeCard } from "./constants";
+
+export const LIZARD_CARDS: ICard[] = [
+  {
+    name: "Шуршунчик",
+    health: 2,
+    mana: 1,
+    attack: 2,
+    type: EnumTypeCard.FAST_ATTACK,
+    imageUrl: "./assets/cards/lizards/gekko.avif",
+  },
+  {
+    name: "Игуаныч",
+    health: 3,
+    mana: 1,
+    attack: 2,
+    type: EnumTypeCard.RANGE_ATTACK,
+    imageUrl: "./assets/cards/lizards/iguan-iguanych.avif",
+  },
+  {
+    name: "'БЗЗЗЗ!'",
+    health: 2,
+    mana: 2,
+    attack: 4,
+    type: EnumTypeCard.FAST_ATTACK,
+    imageUrl: "./assets/cards/lizards/komarinyi-naezdnik.avif",
+  },
+  {
+    name: "Кощезавр",
+    health: 3,
+    mana: 3,
+    attack: 2,
+    type: EnumTypeCard.RANGE_ATTACK,
+    imageUrl: "./assets/cards/lizards/kosheZavr.avif",
+  },
+  {
+    name: "Молотошип",
+    health: 5,
+    mana: 3,
+    attack: 3,
+    imageUrl: "./assets/cards/lizards/molotoShip.avif",
+  },
+
+  {
+    name: "Сталезавр",
+    health: 8,
+    mana: 3,
+    attack: 1,
+    type: EnumTypeCard.TAUNT,
+    imageUrl: "./assets/cards/lizards/kyznecZavr.avif",
+  },
+  {
+    name: "Пивозавр",
+    health: 4,
+    mana: 2,
+    attack: 2,
+    imageUrl: "./assets/cards/lizards/pivozavr.avif",
+  },
+  {
+    name: "Рокозавр",
+    health: 5,
+    mana: 3,
+    attack: 2,
+    imageUrl: "./assets/cards/lizards/Rockozavr.avif",
+  },
+  {
+    name: "ИгуЗитор",
+    health: 4,
+    mana: 3,
+    attack: 3,
+    type: EnumTypeCard.RANGE_ATTACK,
+    imageUrl: "./assets/cards/lizards/iguanaZitor.avif",
+  },
+  {
+    name: "Петулиск",
+    health: 6,
+    mana: 4,
+    attack: 4,
+    type: EnumTypeCard.FAST_ATTACK,
+    imageUrl: "./assets/cards/lizards/vasilisk.avif",
+  },
+    {
+    name: "Крокодилоне",
+    health: 4,
+    mana: 4,
+    attack: 4,
+    type: EnumTypeCard.RANGE_ATTACK,
+    imageUrl: "./assets/cards/lizards/alCrocodilone.avif",
+  },
+  {
+    name: "Дурыныч",
+    health: 6,
+    mana: 4,
+    attack: 4,
+    imageUrl: "./assets/cards/lizards/zmey-dyrunuch.avif",
+  },
+];

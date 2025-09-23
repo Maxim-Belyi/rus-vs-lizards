@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "homepage": "https://maxim-belyi.github.io/rus-vs-lizards/",
   "type": "module",
-
-   "author": { 
+  "author": {
     "name": "Maxim Belyi",
     "url": "https://github.com/maxim-belyi",
     "email": "btf9458@gmail.com"

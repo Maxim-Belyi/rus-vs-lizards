@@ -5,23 +5,28 @@
   --transition-duration: 0.4s;
   --container-padding-x: 5px;
 
-//   --grey: #808080;
+  --white:#f0efef;
+  --grey: #555;
+  --yellow: #edd60a;
+  --green:  #2be225;
+  --green-dark: #012011;
   --black: #000000;
-//   --blue: #def7fe;
-//   --pink: #fadadd;
-//   --purple: #ccccff;
-//   --white: #f5f5f5;
+  --grey-alt: #414040;
   --dark-red: #880808;
+  --dark-red-alt: #4d1414;
   --dark-red-accent: #1a0e0e;
 
   --border-radius: 8px;
 
   --ff-main: "Slavic", sans-serif;
+  --ff-accent: "Shafarik", sans-serif;
 
   --button-shadow: 0px 8px 6px rgba(0, 0, 0, 0.6);
 
-  --text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2); ;
-  --border: 2px solid var(--black);
+  --text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2);
+  --text-shadow-alt: 1px 1px 3px #000, -1px -1px 3px #000;
+
+  --border: 1px solid var(--black);
   --transition: all var(--transition-duration) ease-in-out;
   --transition-dropdown: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 }

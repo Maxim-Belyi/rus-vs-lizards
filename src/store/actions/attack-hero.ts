@@ -1,35 +1,58 @@
 import { EnumTypeCard } from "../../constants/constants";
 import type { IGameStore } from "../game.types";
-import { getCardById } from "./attack-card";
+
 
 export const attackHeroAction = (
   state: IGameStore,
   attackerId: number
 ): Partial<IGameStore> => {
-  const isAttackerPlayer = state.currentTurn === "player";
-  const opponent = state[isAttackerPlayer ? "opponent" : "player"];
+  const isPlayerTurn = state.currentTurn === "player";
+  const attackerPlayerKey = isPlayerTurn ? "player" : "opponent";
+  const defenderPlayerKey = isPlayerTurn ? "opponent" : "player";
 
-  const attacker = getCardById(
-    attackerId,
-    isAttackerPlayer ? state.opponent.deck : state.player.deck
-  );
+  const attackerPlayer = state[attackerPlayerKey];
+  const defenderPlayer = state[defenderPlayerKey];
 
-  const isOpponentHasTaunt = opponent.deck.find(
+  const attacker = attackerPlayer.field.find((card) => card.id === attackerId);
+
+  if (!attacker) {
+    alert(`Атакующая карта с ID ${attackerId} не найдена на поле!`);
+    return {};
+  }
+  if (!attacker.isCanAttack) {
+    alert(`Карта ${attacker.name} уже атаковала в этом ходу!`);
+    return {};
+  }
+
+  const defenderHasTaunt = defenderPlayer.field.some(
     (card) => card.type === EnumTypeCard.TAUNT
   );
 
-  if (attacker && attacker.isCanAttack && !isOpponentHasTaunt) {
-    opponent.health -= attacker.attack;
-    attacker.isCanAttack = false;
-
-    if (opponent.health <= 0) {
-      state.isGameOver = true;
-    }
+  if (defenderHasTaunt) {
+    alert("Вы должны сначала атаковать существо с 'Провокацией'!");
+    return {};
   }
 
+  const updatedDefender = {
+    ...defenderPlayer,
+    health: defenderPlayer.health - attacker.attack,
+  };
+
+  const updatedAttackerField = attackerPlayer.field.map((card) =>
+    card.id === attackerId ? { ...card, isCanAttack: false } : card
+  );
+
+  const updatedAttacker = {
+    ...attackerPlayer,
+    field: updatedAttackerField,
+  };
+
+  const isGameOver = updatedDefender.health <= 0;
+
   return {
-    player: state.player,
-    opponent: state.opponent,
-    isGameOver: state.isGameOver,
+    [attackerPlayerKey]: updatedAttacker,
+    [defenderPlayerKey]: updatedDefender,
+    isGameOver: isGameOver,
+    winner: isGameOver ? attackerPlayerKey : null, 
   };
 };

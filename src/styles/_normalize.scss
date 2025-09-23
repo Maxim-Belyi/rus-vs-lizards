@@ -99,10 +99,6 @@ svg *[stroke] {
   stroke: currentColor
 }
 
-// svg *[fill] {
-//   fill: currentColor
-// }
-
 svg * {
   transition-property: fill, stroke;
 }
