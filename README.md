@@ -15,18 +15,23 @@
 
 ## 🛠️ **Механики карт:**
 
-**Провокация (Taunt): Не даёт атаковать другие карты, пока эта карта на столе.
+**Провокация (Taunt):
+<br>
+<img align="center" src="public/assets/taunt-shield.avif" alt="app screenshot" width="40">
 <br>
 <img  src="public/assets/taunt-shield.avif" alt="app screenshot" width="60">
 <br>
 <br>
-**Шустрый (Fast Attack): Карта может атаковать в тот же ход, когда была разыграна.
+**Шустрый (Fast Attack):
+<br>
+<img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="40">
 <br>
 <img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="40">
 <br>
 <br>
-<br>\*\*Дальняя атака (Ranged Attack): Карта не получает ответного урона при атаке других существ.
-<br>\*\*Дальняя атака (Ranged Attack): Карта не получает ответного урона при атаке других существ.
+<br>**Дальняя атака (Ranged Attack):
+<br>
+<img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="40">
 <br>
 <img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="60">
 <br>
