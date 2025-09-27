@@ -3,7 +3,7 @@ import type { ICard } from "../constants/cards.types";
 export type TPlayer = "player" | "opponent";
 
 export interface IGameCard extends ICard {
-  id: number;
+  id: string,
   isOnBoard: boolean;
   isCanAttack: boolean;
 }
@@ -21,21 +21,21 @@ export interface IGameStore {
   opponent: IHero;
   currentTurn: TPlayer;
   isGameOver: boolean;
-  selectedCardId: number | null;
+  selectedCardId: string | null;
   winner: TPlayer | null;
   shakingHero: TPlayer | null;
-  shakingCardId: number | null;
+  shakingCardId: string | null;
   notification: string | null;
 
-  setSelectedCard: (cardID: number | null) => void;
+  setSelectedCard: (cardID: string | null) => void;
   startGame: () => void;
   endTurn: () => void;
-  playCard: (cardId: number) => void;
-  attackCard: (attackerId: number, targetId: number) => void;
-  attackHero: (attackerId: number) => void;
+  playCard: (cardId: string) => void;
+  attackCard: (attackerId: string, targetId: string) => void;
+  attackHero: (attackerId: string) => void;
   runOpponentTurn: () => Promise<void>;
   setShakingHero: (hero: TPlayer | null) => void;
-  setShakingCard: (cardId: number | null) => void;
+  setShakingCard: (cardId: string | null) => void;
   notify: (message: string) => void;
 }
 

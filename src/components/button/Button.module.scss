@@ -18,14 +18,18 @@
   right: rem(36);
   top: 50%;
   transform: translate(-50%, -50%);
+
+  @include w1200 {
+    right: -4%;
+  }
 }
 
 .endTurnButton {
-  font-size: fluid(22, 14);
+  font-size: fluid(22, 8);
   max-width: fluid(140, 80);
   font-weight: 500;
   white-space: wrap;
-  padding: rem(10) fluid(26, 18);
+  padding: rem(10) fluid(26, 8);
   box-shadow: 0 5px 0 var(--dark-red-alt), 0 6px 12px rgba(0, 0, 0, 0.4);
 
   &:hover {

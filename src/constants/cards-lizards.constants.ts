@@ -3,7 +3,7 @@ import { EnumTypeCard } from "./constants";
 
 export const LIZARD_CARDS: ICard[] = [
   {
-    name: "Шуршунчик",
+    name: "Шуршун",
     health: 2,
     mana: 1,
     attack: 2,
@@ -27,6 +27,14 @@ export const LIZARD_CARDS: ICard[] = [
     imageUrl: "./assets/cards/lizards/komarinyi-naezdnik.avif",
   },
   {
+    name: "Почтозавр",
+    health: 3,
+    mana: 2,
+    attack: 3,
+    type: EnumTypeCard.FAST_ATTACK,
+    imageUrl: "./assets/cards/lizards/postxavr.avif",
+  },
+  {
     name: "Кощезавр",
     health: 3,
     mana: 3,
@@ -41,7 +49,6 @@ export const LIZARD_CARDS: ICard[] = [
     attack: 3,
     imageUrl: "./assets/cards/lizards/molotoShip.avif",
   },
-
   {
     name: "Сталезавр",
     health: 8,
@@ -49,6 +56,14 @@ export const LIZARD_CARDS: ICard[] = [
     attack: 1,
     type: EnumTypeCard.TAUNT,
     imageUrl: "./assets/cards/lizards/kyznecZavr.avif",
+  },
+  {
+    name: "Бронезавр",
+    health: 6,
+    mana: 3,
+    attack: 3,
+    type: EnumTypeCard.TAUNT,
+    imageUrl: "./assets/cards/lizards/stelzavr.avif",
   },
   {
     name: "Пивозавр",
@@ -80,7 +95,7 @@ export const LIZARD_CARDS: ICard[] = [
     type: EnumTypeCard.FAST_ATTACK,
     imageUrl: "./assets/cards/lizards/vasilisk.avif",
   },
-    {
+  {
     name: "Крокодилоне",
     health: 4,
     mana: 4,

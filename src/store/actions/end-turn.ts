@@ -49,13 +49,11 @@ export const endTurnAction = (state: IGameStore): Partial<IGameStore> => {
     player: {
       ...playerAfterDraw,
       mana: newPlayerMana,
-      // deck: resetAttack(state.player.deck),
       field: refreshedPlayerField,
     },
     opponent: {
       ...opponentAfterDraw,
       mana: newOpponentMana,
-      // deck: resetAttack(state.opponent.deck),
       field: refreshedOpponentField,
     },
   };

@@ -4,7 +4,7 @@ import type { IGameStore } from "../game.types";
 
 export const attackHeroAction = (
   state: IGameStore,
-  attackerId: number
+  attackerId: string
 ): Partial<IGameStore> => {
   const isPlayerTurn = state.currentTurn === "player";
   const attackerPlayerKey = isPlayerTurn ? "player" : "opponent";
@@ -16,11 +16,10 @@ export const attackHeroAction = (
   const attacker = attackerPlayer.field.find((card) => card.id === attackerId);
 
   if (!attacker) {
-    alert(`Атакующая карта с ID ${attackerId} не найдена на поле!`);
+    console.error(`Атакующая карта с ID ${attackerId} не найдена на поле!`);
     return {};
   }
   if (!attacker.isCanAttack) {
-    alert(`Карта ${attacker.name} уже атаковала в этом ходу!`);
     return {};
   }
 
@@ -29,7 +28,6 @@ export const attackHeroAction = (
   );
 
   if (defenderHasTaunt) {
-    alert("Вы должны сначала атаковать существо с 'Провокацией'!");
     return {};
   }
 

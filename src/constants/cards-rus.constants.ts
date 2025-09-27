@@ -55,6 +55,13 @@ export const RUS_CARDS: ICard[] = [
     type: EnumTypeCard.FAST_ATTACK,
     imageUrl: "./assets/cards/rusy/RyboSlav.avif",
   },
+    {
+    name: "Репова",
+    health: 6,
+    mana: 3,
+    attack: 2,
+    imageUrl: "./assets/cards/rusy/repovna.avif",
+  },
   {
     name: "Лукослав",
     health: 3,
@@ -82,7 +89,7 @@ export const RUS_CARDS: ICard[] = [
   {
     name: "Леший",
     health: 6,
-    mana: 4,
+    mana: 5,
     attack: 2,
     type: EnumTypeCard.TAUNT,
     imageUrl: "./assets/cards/rusy/Leshiy.avif",
@@ -90,9 +97,16 @@ export const RUS_CARDS: ICard[] = [
   {
     name: "Староста",
     health: 5,
-    mana: 4,
+    mana: 5,
     attack: 4,
      type: EnumTypeCard.TAUNT,
     imageUrl: "./assets/cards/rusy/Starosta.avif",
+  },
+  {
+    name: "Коростель",
+    health: 5,
+    mana: 5,
+    attack: 5,
+    imageUrl: "./assets/cards/rusy/crex.avif",
   },
 ];

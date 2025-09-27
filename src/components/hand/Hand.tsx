@@ -6,7 +6,7 @@ import styles from "./Hand.module.scss";
 interface HandProps {
   cards: IGameCard[];
   isOpponent: boolean;
-  onCardClick?: (cardId: number) => void; 
+  onCardClick?: (cardId: string) => void; 
 }
 
 export function Hand({ cards, isOpponent, onCardClick }: HandProps) {

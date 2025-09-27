@@ -34,7 +34,7 @@ export function GameBoard() {
   };
 
   const handleFieldCardClick = (
-    clickedCardId: number,
+    clickedCardId:string,
     isPlayerCard: boolean
   ) => {
     console.log(`ID: ${clickedCardId}, игрок ${isPlayerCard}`);
@@ -46,7 +46,6 @@ export function GameBoard() {
       if (selectedCardId) {
         setShakingCard(clickedCardId);
         setTimeout(() => setShakingCard(null), 500)
-
         attackCard(selectedCardId, clickedCardId);
         setSelectedCard(null);
       }
@@ -56,7 +55,7 @@ export function GameBoard() {
   return (
     <>
     <NotificationBubble message={notification} />
-      {/* --- оппонент --- */}
+
       <section>
         <PlayerDisplay
           player={opponent}
@@ -65,6 +64,7 @@ export function GameBoard() {
           isShaking={shakingHero === "opponent"}
         />
         <Hand cards={opponent.hand} isOpponent={true} />
+
         <Field
           isOpponent={true}
           cards={opponent.field}
@@ -74,7 +74,6 @@ export function GameBoard() {
         />
       </section>
 
-      {/* --- кнопка --- */}
       <div className={`${Button.endTurnWrapper}`}>
         <button
           className={`${Button.buttonRed} ${Button.endTurnButton}`}
@@ -85,7 +84,6 @@ export function GameBoard() {
         </button>
       </div>
 
-      {/* --- игрок --- */}
       <section>
         
         <PlayerDisplay
@@ -93,6 +91,7 @@ export function GameBoard() {
           isOpponent={false}
           isShaking={shakingHero === "player"}
         />
+
         <Field
           isOpponent={false}
           cards={player.field}
@@ -100,6 +99,7 @@ export function GameBoard() {
           onCardClick={(cardId) => handleFieldCardClick(cardId, true)}
           shakingCardId={shakingCardId}
         />
+
         <Hand cards={player.hand} isOpponent={false} onCardClick={playCard} />
       </section>
     </>

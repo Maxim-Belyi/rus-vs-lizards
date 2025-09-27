@@ -6,10 +6,10 @@ import { AnimatePresence } from "motion/react";
 
 interface FieldProps {
   cards: IGameCard[];
-  selectedCardId: number | null;
+  selectedCardId: string | null;
   isOpponent: boolean;
-  onCardClick: (cardId: number) => void;
-  shakingCardId: number | null;
+  onCardClick: (cardId: string) => void;
+  shakingCardId: string | null;
 }
 
 export function Field({

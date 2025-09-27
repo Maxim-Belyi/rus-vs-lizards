@@ -3,8 +3,8 @@ import type { IGameStore } from "../game.types";
 
 export const attackCardAction = (
   state: IGameStore,
-  attackerId: number,
-  targetId: number
+  attackerId: string,
+  targetId: string
 ): Partial<IGameStore> => {
   const isPlayerTurn = state.currentTurn === "player";
   const attackerPlayerKey = isPlayerTurn ? "player" : "opponent";

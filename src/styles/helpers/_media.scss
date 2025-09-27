@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use './functions' as*;
 
-$desktop: 1650px;
+$w1200: 1200px;
 
 $tablet: 1023px;
 
@@ -9,8 +9,8 @@ $mobile: 767px;
 
 $mobile-s: 480px;
 
-@mixin desktop {
-  @media (max-width: $desktop) {
+@mixin w1200 {
+  @media (max-width: $w1200) {
     @content;
   }
 }

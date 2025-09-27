@@ -5,7 +5,7 @@ export const drawCardsAction = (player: IHero, amount: number): IHero => {
   const availableSlots = maxCardsOnHand - player.hand.length;
 
   if (availableSlots <= 0) {
-    console.error("Максимум карт в руке, карты не добираются");
+    alert("Максимум карт в руке, карты не добираются");
     return player;
   }
 

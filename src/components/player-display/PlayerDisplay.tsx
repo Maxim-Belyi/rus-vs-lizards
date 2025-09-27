@@ -34,8 +34,7 @@ export function PlayerDisplay({
     <motion.div
       variants={shakeVariants}
       animate={isShaking ? "shaking" : "idle"}
-      // onAnimationComplete={onAnimationComplete}
-
+      
       className={clsx(isOpponent ? styles.playerLizard : styles.playerRus)}
       onClick={onHeroClick}
     >

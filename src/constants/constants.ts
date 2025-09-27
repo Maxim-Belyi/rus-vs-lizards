@@ -8,7 +8,7 @@ export const EnumTypeCard = {
 
 export const initialHandSize: number = 5;
 export const maxCardsOnHand: number = 7;
-export const rotateMultiplier: number = 8;
+export const maxCardsOnField: number = 7;
 export const maxMana: number = 10;
 export const startingMana: number = 2;
 export const startingHealth: number = 20;

@@ -3,7 +3,7 @@ import { EnumTypeCard } from "../../constants/constants";
 
 export const PlayCardAction = (
   state: IGameStore,
-  cardId: number
+  cardId: string
 ): Partial<IGameStore> => {
   const currentPlayerKey =
     state.currentTurn === "player" ? "player" : "opponent";
@@ -14,7 +14,7 @@ export const PlayCardAction = (
   );
 
   if (!cardToPlay) {
-    alert(`Карта с id: ${cardId} не найдена в руке игрока ${currentPlayerKey}`);
+    console.error(`Карта с id: ${cardId} не найдена в руке игрока ${currentPlayerKey}`);
     return {};
   }
 
