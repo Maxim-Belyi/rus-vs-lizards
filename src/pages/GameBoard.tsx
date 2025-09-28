@@ -3,7 +3,8 @@ import { PlayerDisplay } from "../components/player-display/PlayerDisplay";
 import { Hand } from "../components/hand/Hand";
 import { Field } from "../components/field/Field";
 import Button from "../components/button/Button.module.scss";
-import {NotificationBubble} from "../components/notification-bubble/NotificationBubble.js"
+import { NotificationBubble } from "../components/notification-bubble/NotificationBubble.js";
+import { AudioPlayer } from "../components/music-player/MusicPlayer.js";
 
 export function GameBoard() {
   const {
@@ -34,7 +35,7 @@ export function GameBoard() {
   };
 
   const handleFieldCardClick = (
-    clickedCardId:string,
+    clickedCardId: string,
     isPlayerCard: boolean
   ) => {
     console.log(`ID: ${clickedCardId}, игрок ${isPlayerCard}`);
@@ -45,7 +46,7 @@ export function GameBoard() {
     } else {
       if (selectedCardId) {
         setShakingCard(clickedCardId);
-        setTimeout(() => setShakingCard(null), 500)
+        setTimeout(() => setShakingCard(null), 500);
         attackCard(selectedCardId, clickedCardId);
         setSelectedCard(null);
       }
@@ -54,8 +55,8 @@ export function GameBoard() {
 
   return (
     <>
-    <NotificationBubble message={notification} />
-
+      <NotificationBubble message={notification} />
+      <AudioPlayer />
       <section>
         <PlayerDisplay
           player={opponent}
@@ -85,7 +86,6 @@ export function GameBoard() {
       </div>
 
       <section>
-        
         <PlayerDisplay
           player={player}
           isOpponent={false}
