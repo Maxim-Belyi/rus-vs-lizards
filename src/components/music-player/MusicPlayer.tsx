@@ -3,7 +3,7 @@ import styles from "./MusicPlayer.module.scss";
 import clsx from "clsx";
 import { FaVolumeUp, FaVolumeMute } from "react-icons/fa";
 
-const AUDIO_SRC = "public/audio/main.mp3";
+const AUDIO_SRC = "./audio/main.mp3";
 
 export const AudioPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
