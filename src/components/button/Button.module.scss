@@ -20,17 +20,22 @@
   transform: translate(-50%, -50%);
 
   @include w1200 {
-    right: -4%;
+    right: -2%;
   }
 }
 
 .endTurnButton {
   font-size: fluid(22, 8);
-  max-width: fluid(140, 80);
+  max-width: fluid(140, 60);
   font-weight: 500;
   white-space: wrap;
-  padding: rem(10) fluid(26, 8);
+  padding: fluid(10, 6) fluid(26, 8);
   box-shadow: 0 5px 0 var(--dark-red-alt), 0 6px 12px rgba(0, 0, 0, 0.4);
+
+  & > svg {
+    width: fluid(60, 20);
+    height: fluid(40, 20);
+  }
 
   &:hover {
     transform: translateY(-2px);
@@ -42,10 +47,15 @@
   }
 
   &:disabled {
-    background-color: var(--grey);
+    background-color: var(--white);
     color: var(--grey-alt);
     transform: translateY(4px);
     cursor: not-allowed;
     box-shadow: none;
+
+    & > svg {
+      transition-duration: var(--transition-duration);
+      rotate: 180deg;
+    }
   }
 }

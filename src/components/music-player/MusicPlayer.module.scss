@@ -1,0 +1,31 @@
+@use "@/styles/helpers" as *;
+
+.musicPlayer {
+  position: absolute;
+  max-width: rem(90);
+  top: 18%;
+  right: 4%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+
+  @include w1200 {
+    right: -1%;
+  }
+}
+
+.musicPlayerButton {
+  border-radius: var(--border-radius);
+  max-width: fluid(140, 60);
+  white-space: wrap;
+  padding: fluid(10, 6) fluid(22, 8);
+
+  & > svg {
+    width: rem(28);
+    height: rem(28);
+  }
+
+  &:hover {
+    scale: 1.1;
+    background-color: var(--dark-red);
+  }
+}
