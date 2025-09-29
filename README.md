@@ -26,6 +26,7 @@
 <br>
 <br>
 <br>\*\*Дальняя атака (Ranged Attack): Карта не получает ответного урона при атаке других существ.
+<br>\*\*Дальняя атака (Ranged Attack): Карта не получает ответного урона при атаке других существ.
 <br>
 <img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="60">
 <br>
@@ -56,6 +57,7 @@
 
 - **Утилиты:**
   - [**clsx**](https://github.com/lukeed/clsx) — для объединения CSS-классов.
+  - [**react-icons**] (https://react-icons.github.io/react-icons/) — для стилизации
 
 ---
 

@@ -4,7 +4,7 @@
   position: absolute;
   left: 1%;
   bottom: -1%;
-  width: fluid(280, 120);
+  width: fluid(280, 100);
   aspect-ratio: 1;
   background: url("@assets/frame-rusy.avif") center/contain no-repeat;
 }
@@ -23,7 +23,7 @@
   position: absolute;
   color: var(--dark-red-accent);
   text-shadow: var(--text-shadow);
-  font-size: fluid(26, 12);
+  font-size: fluid(24, 10);
   bottom: 12%;
   left: 28%;
 }
@@ -32,7 +32,7 @@
   position: absolute;
   display: flex;
   align-items: center;
-  font-size: fluid(26, 12);
+  font-size: fluid(24, 10);
   bottom: 12%;
   left: 24%;
   padding-inline: rem(8);
@@ -69,7 +69,7 @@
   text-shadow: var(--text-shadow);
   position: absolute;
   font-weight: bold;
-  font-size: fluid(46, 14);
+  font-size: fluid(44, 10);
   width: fluid(94, 18);
   height: fluid(94, 18);
   border-radius: 50%;
@@ -77,8 +77,8 @@
 }
 
 .manaRus {
-  top: -4%;
-  left: -8%;
+  top: 2%;
+  left: -2%;
 }
 
 .manaLizard {
