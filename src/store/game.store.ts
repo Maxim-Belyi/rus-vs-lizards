@@ -114,7 +114,7 @@ export const useGameStore = create<IGameStore>((set, get) => ({
     const cardToPlay = player.hand.find((card) => card.id === cardId);
 
     if (cardToPlay && player.mana < cardToPlay.mana) {
-      get().notify("Нехватает маны!");
+      get().notify("Не хватает маны!");
       return;
     }
 
