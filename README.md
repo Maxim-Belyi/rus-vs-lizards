@@ -17,17 +17,17 @@
 
 **Провокация (Taunt):
 <br>
-<img align="center" src="public/assets/taunt-shield.avif" alt="app screenshot" width="70">
+<img align="center" src="public/assets/taunt-shield.avif" alt="app screenshot" width="120">
 <br>
 <br>
 **Шустрый (Fast Attack):
 <br>
-<img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="50">
+<img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="100">
 <br>
 <br>
 <br>**Дальняя атака (Ranged Attack):
 <br>
-<img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="60">
+<img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="110">
 <br>
 
 ## 🚀 Основные фичи
