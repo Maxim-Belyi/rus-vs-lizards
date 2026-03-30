@@ -19,19 +19,13 @@
 <br>
 <img align="center" src="public/assets/taunt-shield.avif" alt="app screenshot" width="40">
 <br>
-<img  src="public/assets/taunt-shield.avif" alt="app screenshot" width="60">
-<br>
 <br>
 **Шустрый (Fast Attack):
 <br>
 <img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="40">
 <br>
-<img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="40">
-<br>
 <br>
 <br>**Дальняя атака (Ranged Attack):
-<br>
-<img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="40">
 <br>
 <img align="center" src="public/assets/range-attack.avif" alt="app screenshot" width="60">
 <br>
