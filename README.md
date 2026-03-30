@@ -17,12 +17,12 @@
 
 **Провокация (Taunt):
 <br>
-<img align="center" src="public/assets/taunt-shield.avif" alt="app screenshot" width="40">
+<img align="center" src="public/assets/taunt-shield.avif" alt="app screenshot" width="70">
 <br>
 <br>
 **Шустрый (Fast Attack):
 <br>
-<img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="40">
+<img align="center" src="public/assets/fast-attack.avif" alt="app screenshot" width="50">
 <br>
 <br>
 <br>**Дальняя атака (Ranged Attack):
