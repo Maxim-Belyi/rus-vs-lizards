@@ -2,6 +2,9 @@ import type { IHero } from "../../store/game.types";
 import styles from "./PlayerInterface.module.scss";
 import clsx from "clsx";
 import { motion } from "motion/react";
+import { useRef, useEffect, useContext } from "react";
+import { HeroRefsContext } from "../../context/HeroRefsContext";
+import type { TPlayer } from "../../store/game.types";
 
 const shakeVariants = {
   idle: {
@@ -22,6 +25,7 @@ interface PlayerInterfaceProps {
   isShaking?: boolean;
   onHeroClick?: () => void;
   onAnimationComplete?: () => void;
+  playerKey: TPlayer;
 }
 
 export function PlayerDisplay({
@@ -29,9 +33,18 @@ export function PlayerDisplay({
   isOpponent,
   isShaking,
   onHeroClick,
+  playerKey,
 }: PlayerInterfaceProps) {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { registerHeroRef } = useContext(HeroRefsContext);
+
+  useEffect(() => {
+    registerHeroRef(playerKey, heroRef);
+  }, [playerKey, registerHeroRef]);
+
   return (
     <motion.div
+      ref={heroRef}
       variants={shakeVariants}
       animate={isShaking ? "shaking" : "idle"}
       

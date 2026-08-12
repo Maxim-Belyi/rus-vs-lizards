@@ -5,9 +5,25 @@ import { endTurnAction } from "./end-turn";
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
+const ATTACK_ANIM_DURATION = 400;
+
+function computeOffset(
+  attackerEl: HTMLElement,
+  targetEl: HTMLElement
+): { x: number; y: number } {
+  const a = attackerEl.getBoundingClientRect();
+  const t = targetEl.getBoundingClientRect();
+  return {
+    x: t.left + t.width / 2 - (a.left + a.width / 2),
+    y: t.top + t.height / 2 - (a.top + a.height / 2),
+  };
+}
+
 export const runOpponentTurnAction = async (
   get: () => IGameStore,
-  set: (partial: Partial<IGameStore> | ((state: IGameStore) => Partial<IGameStore>)) => void
+  set: (partial: Partial<IGameStore> | ((state: IGameStore) => Partial<IGameStore>)) => void,
+  getCardEl?: (id: string) => HTMLElement | null,
+  getHeroEl?: (key: "player" | "opponent") => HTMLElement | null
 ) => {
   await sleep(1000);
 
@@ -51,20 +67,46 @@ export const runOpponentTurnAction = async (
       target = playerField[Math.floor(Math.random() * playerField.length)];
     }
 
-    await sleep(1000);
+    await sleep(600);
 
     if (target) {
+      // Try to animate using DOM refs
+      const attackerEl = getCardEl?.(attackerId) ?? null;
+      const targetEl = getCardEl?.(target.id) ?? null;
+
+      if (attackerEl && targetEl) {
+        const offset = computeOffset(attackerEl, targetEl);
+        get().setAttackAnimation({ attackerId, targetId: target.id, offset });
+        await sleep(ATTACK_ANIM_DURATION);
+        get().setAttackAnimation(null);
+        // Brief pause before damage lands
+        await sleep(60);
+      }
+
       get().setShakingCard(target.id);
-      setTimeout(() => get().setShakingCard(null), 500);
+      setTimeout(() => get().setShakingCard(null), 400);
       get().attackCard(attacker.id, target.id);
     } else {
+      // Attack hero
+      const attackerEl = getCardEl?.(attackerId) ?? null;
+      const heroEl = getHeroEl?.("player") ?? null;
+
+      if (attackerEl && heroEl) {
+        const offset = computeOffset(attackerEl, heroEl);
+        get().setAttackAnimation({ attackerId, targetId: null, offset });
+        await sleep(ATTACK_ANIM_DURATION);
+        get().setAttackAnimation(null);
+        await sleep(60);
+      }
+
       get().setShakingHero("player");
-      setTimeout(() => get().setShakingHero(null), 500);
+      setTimeout(() => get().setShakingHero(null), 400);
       get().attackHero(attacker.id);
     }
+
+    await sleep(400);
   }
 
   console.log("Противник завершил ход");
   set((state) => endTurnAction(state));
 };
-

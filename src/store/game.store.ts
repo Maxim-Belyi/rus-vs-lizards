@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { IGameStore, IHero, TPlayer } from "./game.types";
+import type { IGameStore, IHero, TPlayer, IAttackAnimation } from "./game.types";
 import { EnumTypeCard, maxCardsOnField } from "../constants/constants";
 import { createDeck } from "../functions/create-deck";
 import { endTurnAction } from "./actions/end-turn";
@@ -33,6 +33,7 @@ export const useGameStore = create<IGameStore>((set, get) => ({
   winner: null,
   shakingHero: null,
   shakingCardId: null,
+  attackAnimation: null,
 
   notify: (message: string) => {
     set({ notification: message });
@@ -91,19 +92,25 @@ export const useGameStore = create<IGameStore>((set, get) => ({
     set({ selectedCardId: cardId });
   },
 
+  setAttackAnimation: (anim: IAttackAnimation | null) => {
+    set({ attackAnimation: anim });
+  },
+
   startGame: () => {
     set(startGame());
   },
 
-  runOpponentTurn: async () => {
-    await runOpponentTurnAction(get, set);
+  runOpponentTurn: async (
+    getCardEl?: (id: string) => HTMLElement | null,
+    getHeroEl?: (key: "player" | "opponent") => HTMLElement | null
+  ) => {
+    await runOpponentTurnAction(get, set, getCardEl, getHeroEl);
   },
 
   endTurn: () => {
     const currentTurn = get().currentTurn;
     if (currentTurn === "player") {
       set(endTurnAction(get()));
-      get().runOpponentTurn();
     }
   },
 

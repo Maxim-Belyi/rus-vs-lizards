@@ -4,6 +4,8 @@ import styles from "./Card.module.scss";
 import clsx from "clsx";
 import type { CSSProperties } from "react";
 import { motion } from "motion/react";
+import { useEffect, useRef, useContext } from "react";
+import { CardRefsContext } from "../../context/CardRefsContext";
 
 interface CardDisplayProps {
   card: IGameCard;
@@ -15,12 +17,17 @@ interface CardDisplayProps {
   onClick?: () => void;
   isDisabled?: boolean;
   isShaking?: boolean;
+  attackOffset?: { x: number; y: number } | null;
 }
+
+const ATTACK_DURATION = 0.4;
 
 const cardVariants = {
   idle: {
     x: 0,
+    y: 0,
     rotate: 0,
+    zIndex: 1,
   },
   shaking: {
     x: [0, -22, 22, -22, 22, 0],
@@ -40,22 +47,50 @@ const cardVariants = {
 export function CardDisplay({
   card,
   isReadyToAttack,
-  // style,
   isFaceDown,
   isOpponent,
   onClick,
   isDisabled,
-  // isSelected,
   isShaking,
+  attackOffset,
 }: CardDisplayProps) {
   const hasFastAttack = card.type === EnumTypeCard.FAST_ATTACK;
   const hasRangeAttack = card.type === EnumTypeCard.RANGE_ATTACK;
   const hasTaunt = card.type === EnumTypeCard.TAUNT;
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const { registerCardRef, unregisterCardRef } = useContext(CardRefsContext);
+
+  useEffect(() => {
+    registerCardRef(card.id, buttonRef);
+    return () => unregisterCardRef(card.id);
+  }, [card.id, registerCardRef, unregisterCardRef]);
+
+  const isAttacking = !!attackOffset;
+  const attackAnimate = isAttacking
+    ? {
+        x: [0, attackOffset.x * 0.9, 0],
+        y: [0, attackOffset.y * 0.9, 0],
+        zIndex: [1, 999, 1],
+        transition: {
+          duration: ATTACK_DURATION,
+          times: [0, 0.48, 1],
+          ease: ["easeIn", "easeOut"],
+        },
+      }
+    : undefined;
+
   return (
     <motion.button
-      variants={cardVariants}
-      animate={isShaking ? "shaking" : "idle"}
+      ref={buttonRef}
+      variants={isAttacking ? undefined : cardVariants}
+      animate={
+        isAttacking
+          ? attackAnimate
+          : isShaking
+          ? "shaking"
+          : "idle"
+      }
       exit="exit"
       whileHover={
         !isOpponent && !isDisabled
@@ -72,7 +107,6 @@ export function CardDisplay({
         [styles.canAttack]: isReadyToAttack,
       })}
       data-facedown={isFaceDown}
-      // key={card.id}
       onClick={onClick}
       disabled={isDisabled}
       style={

@@ -10,6 +10,8 @@ interface FieldProps {
   isOpponent: boolean;
   onCardClick: (cardId: string) => void;
   shakingCardId: string | null;
+  attackingCardId?: string | null;
+  attackOffset?: { x: number; y: number } | null;
 }
 
 export function Field({
@@ -18,6 +20,8 @@ export function Field({
   isOpponent,
   onCardClick,
   shakingCardId,
+  attackingCardId,
+  attackOffset,
 }: FieldProps) {
   return (
     <div
@@ -36,6 +40,9 @@ export function Field({
             isReadyToAttack={!isOpponent && card.isCanAttack}
             isDisabled={false}
             isShaking={shakingCardId === card.id}
+            attackOffset={
+              attackingCardId === card.id ? attackOffset : null
+            }
           />
         ))}
       </AnimatePresence>

@@ -2,6 +2,12 @@ import type { ICard } from "../constants/cards.types";
 
 export type TPlayer = "player" | "opponent";
 
+export interface IAttackAnimation {
+  attackerId: string;
+  targetId: string | null; // null = атака на героя
+  offset: { x: number; y: number };
+}
+
 export interface IGameCard extends ICard {
   id: string,
   isOnBoard: boolean;
@@ -26,14 +32,19 @@ export interface IGameStore {
   shakingHero: TPlayer | null;
   shakingCardId: string | null;
   notification: string | null;
+  attackAnimation: IAttackAnimation | null;
 
   setSelectedCard: (cardID: string | null) => void;
+  setAttackAnimation: (anim: IAttackAnimation | null) => void;
   startGame: () => void;
   endTurn: () => void;
   playCard: (cardId: string) => void;
   attackCard: (attackerId: string, targetId: string) => void;
   attackHero: (attackerId: string) => void;
-  runOpponentTurn: () => Promise<void>;
+  runOpponentTurn: (
+    getCardEl?: (id: string) => HTMLElement | null,
+    getHeroEl?: (key: "player" | "opponent") => HTMLElement | null
+  ) => Promise<void>;
   setShakingHero: (hero: TPlayer | null) => void;
   setShakingCard: (cardId: string | null) => void;
   notify: (message: string) => void;
