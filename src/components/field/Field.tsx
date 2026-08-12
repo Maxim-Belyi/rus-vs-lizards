@@ -36,6 +36,7 @@ export function Field({
             card={card}
             onClick={() => onCardClick(card.id)}
             isOpponent={isOpponent}
+            isOnField={true}
             isSelected={!isOpponent && selectedCardId === card.id}
             isReadyToAttack={!isOpponent && card.isCanAttack}
             isDisabled={false}

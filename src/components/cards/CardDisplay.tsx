@@ -18,15 +18,27 @@ interface CardDisplayProps {
   isDisabled?: boolean;
   isShaking?: boolean;
   attackOffset?: { x: number; y: number } | null;
+  isOnField?: boolean; // triggers spawn animation on first mount only
 }
 
 export const ATTACK_DURATION = 1.0; // seconds
 
 const cardVariants = {
+  initial: {
+    opacity: 0,
+    scale: 0.6,
+    y: 40,
+  },
   idle: {
+    opacity: 1,
     x: 0,
     y: 0,
+    scale: 1,
     rotate: 0,
+    transition: {
+      duration: 0.45,
+      ease: "backOut" as const,
+    },
   },
   shaking: {
     x: [0, -22, 22, -22, 22, 0],
@@ -36,9 +48,9 @@ const cardVariants = {
   exit: {
     opacity: 0,
     scale: 0.5,
-    y: -70,
+    y: -60,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
     },
   },
 };
@@ -52,6 +64,7 @@ export function CardDisplay({
   isDisabled,
   isShaking,
   attackOffset,
+  isOnField,
 }: CardDisplayProps) {
   const hasFastAttack = card.type === EnumTypeCard.FAST_ATTACK;
   const hasRangeAttack = card.type === EnumTypeCard.RANGE_ATTACK;
@@ -60,12 +73,23 @@ export function CardDisplay({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const { registerCardRef, unregisterCardRef } = useContext(CardRefsContext);
 
+  // Track whether the card has already played its spawn animation.
+  // This prevents re-triggering initial state when `variants` prop changes
+  // (e.g., after attack animation ends and variants switches from undefined → cardVariants)
+  const hasSpawnedRef = useRef(false);
+
   useEffect(() => {
     registerCardRef(card.id, buttonRef);
     return () => unregisterCardRef(card.id);
   }, [card.id, registerCardRef, unregisterCardRef]);
 
   const isAttacking = !!attackOffset;
+
+  // Only play spawn animation on first mount, never again
+  const initialVariant = isOnField && !hasSpawnedRef.current ? "initial" : false;
+  if (isOnField) {
+    hasSpawnedRef.current = true;
+  }
 
   // Keyframe animation: fly to target (100%), briefly pause, return home
   const attackAnimate = isAttacking
@@ -84,7 +108,8 @@ export function CardDisplay({
   return (
     <motion.button
       ref={buttonRef}
-      variants={isAttacking ? undefined : cardVariants}
+      variants={cardVariants}
+      initial={initialVariant}
       animate={isAttacking ? attackAnimate : isShaking ? "shaking" : "idle"}
       exit="exit"
       style={
