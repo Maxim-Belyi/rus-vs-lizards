@@ -22,6 +22,11 @@
   @include w1200 {
     right: -2%;
   }
+
+  @media (max-height: 600px) {
+    transform: translate(-50%, -50%) scale(0.5);
+    right: -8%;
+  }
 }
 
 .endTurnButton {

@@ -7,6 +7,13 @@
   width: fluid(280, 100);
   aspect-ratio: 1;
   background: url("@assets/frame-rusy.avif") center/contain no-repeat;
+
+  @media (max-height: 600px) {
+    transform: scale(0.55);
+    transform-origin: left bottom;
+    bottom: -5%;
+    left: 0;
+  }
 }
 
 .playerLizard {
@@ -17,6 +24,13 @@
   aspect-ratio: 1;
   z-index: 2;
   background: url("@assets/frame-lizard.avif") center/contain no-repeat;
+
+  @media (max-height: 600px) {
+    transform: scale(0.55);
+    transform-origin: left top;
+    top: -5%;
+    left: 0;
+  }
 }
 
 .nameRus {

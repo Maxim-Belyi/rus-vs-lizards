@@ -11,6 +11,12 @@
   @include w1200 {
     right: -1%;
   }
+
+  @media (max-height: 600px) {
+    top: 5%;
+    right: -2%;
+    transform: translate(-50%, 0) scale(0.6);
+  }
 }
 
 .musicPlayerButton {

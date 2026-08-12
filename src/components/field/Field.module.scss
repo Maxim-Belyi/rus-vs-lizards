@@ -10,10 +10,20 @@
   position: absolute;
   bottom: 18%;
   transform: translate(-50%, -50%);
+
+  @media (max-height: 600px) {
+    transform: translate(-50%, -50%) scale(0.5);
+    bottom: 0%;
+  }
 }
 
 .fieldContainerLizard {
   position: absolute;
   top: 28%;
   transform: translate(-50%, -50%);
+
+  @media (max-height: 600px) {
+    transform: translate(-50%, -50%) scale(0.5);
+    top: 6%;
+  }
 }
