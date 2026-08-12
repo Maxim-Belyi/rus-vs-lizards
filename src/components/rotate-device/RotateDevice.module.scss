@@ -1,0 +1,59 @@
+@use "@/styles/helpers" as *;
+
+.rotateDeviceContainer {
+  display: none; // Hidden by default
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 5, 5, 0.95);
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  padding: rem(24);
+  text-align: center;
+}
+
+.icon {
+  width: rem(80);
+  height: rem(80);
+  margin-bottom: rem(24);
+  animation: rotatePhone 2s ease-in-out infinite;
+}
+
+.title {
+  color: var(--dark-red);
+  font-size: fluid(32, 24);
+  margin-bottom: rem(16);
+  font-family: var(--ff-accent);
+  letter-spacing: 2px;
+}
+
+.description {
+  font-size: fluid(18, 14);
+  color: #fcf2d9;
+  line-height: 1.5;
+  font-family: var(--ff-accent);
+  letter-spacing: 2px;
+}
+
+@keyframes rotatePhone {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-90deg);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .rotateDeviceContainer {
+    display: flex;
+  }
+}
