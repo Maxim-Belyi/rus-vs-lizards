@@ -10,7 +10,7 @@ import { HeroRefsProvider, useHeroRefs } from "../context/HeroRefsContext";
 import { useState } from "react";
 import type { IAttackAnimation } from "../store/game.types";
 
-const ATTACK_DURATION_MS = 400;
+const ATTACK_DURATION_MS = 1000; // matches ATTACK_DURATION in CardDisplay (1 second)
 
 function computeOffset(
   attackerEl: HTMLElement,

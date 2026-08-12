@@ -1,17 +1,16 @@
 import { createContext, useContext, useRef } from "react";
-import type { RefObject, ReactNode } from "react";
+import type { ReactNode } from "react";
 
-type CardRefsMap = Map<string, RefObject<HTMLButtonElement>>;
+type CardRefEntry = { current: HTMLButtonElement | null };
+type CardRefsMap = Map<string, CardRefEntry>;
 
 interface CardRefsContextType {
-  cardRefs: CardRefsMap;
-  registerCardRef: (id: string, ref: RefObject<HTMLButtonElement>) => void;
+  registerCardRef: (id: string, ref: CardRefEntry) => void;
   unregisterCardRef: (id: string) => void;
-  getCardRef: (id: string) => RefObject<HTMLButtonElement> | undefined;
+  getCardRef: (id: string) => CardRefEntry | undefined;
 }
 
 export const CardRefsContext = createContext<CardRefsContextType>({
-  cardRefs: new Map(),
   registerCardRef: () => {},
   unregisterCardRef: () => {},
   getCardRef: () => undefined,
@@ -20,7 +19,7 @@ export const CardRefsContext = createContext<CardRefsContextType>({
 export function CardRefsProvider({ children }: { children: ReactNode }) {
   const cardRefsMapRef = useRef<CardRefsMap>(new Map());
 
-  const registerCardRef = (id: string, ref: RefObject<HTMLButtonElement>) => {
+  const registerCardRef = (id: string, ref: CardRefEntry) => {
     cardRefsMapRef.current.set(id, ref);
   };
 
@@ -34,12 +33,7 @@ export function CardRefsProvider({ children }: { children: ReactNode }) {
 
   return (
     <CardRefsContext.Provider
-      value={{
-        cardRefs: cardRefsMapRef.current,
-        registerCardRef,
-        unregisterCardRef,
-        getCardRef,
-      }}
+      value={{ registerCardRef, unregisterCardRef, getCardRef }}
     >
       {children}
     </CardRefsContext.Provider>

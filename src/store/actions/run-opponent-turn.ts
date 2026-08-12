@@ -5,7 +5,7 @@ import { endTurnAction } from "./end-turn";
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-const ATTACK_ANIM_DURATION = 400;
+const ATTACK_ANIM_DURATION = 1000; // 1 second — matches ATTACK_DURATION in CardDisplay
 
 function computeOffset(
   attackerEl: HTMLElement,

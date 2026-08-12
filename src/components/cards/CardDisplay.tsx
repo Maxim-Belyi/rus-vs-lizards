@@ -20,14 +20,13 @@ interface CardDisplayProps {
   attackOffset?: { x: number; y: number } | null;
 }
 
-const ATTACK_DURATION = 0.4;
+export const ATTACK_DURATION = 1.0; // seconds
 
 const cardVariants = {
   idle: {
     x: 0,
     y: 0,
     rotate: 0,
-    zIndex: 1,
   },
   shaking: {
     x: [0, -22, 22, -22, 22, 0],
@@ -67,15 +66,17 @@ export function CardDisplay({
   }, [card.id, registerCardRef, unregisterCardRef]);
 
   const isAttacking = !!attackOffset;
+
+  // Keyframe animation: fly to target (100%), briefly pause, return home
   const attackAnimate = isAttacking
     ? {
-        x: [0, attackOffset.x * 0.9, 0],
-        y: [0, attackOffset.y * 0.9, 0],
-        zIndex: [1, 999, 1],
+        x: [0, attackOffset.x, attackOffset.x * 0.85, 0],
+        y: [0, attackOffset.y, attackOffset.y * 0.85, 0],
+        scale: [1, 1.15, 1, 1],
         transition: {
           duration: ATTACK_DURATION,
-          times: [0, 0.48, 1],
-          ease: ["easeIn", "easeOut"],
+          times: [0, 0.5, 0.65, 1],
+          ease: "easeInOut" as const,
         },
       }
     : undefined;
@@ -84,36 +85,32 @@ export function CardDisplay({
     <motion.button
       ref={buttonRef}
       variants={isAttacking ? undefined : cardVariants}
-      animate={
-        isAttacking
-          ? attackAnimate
-          : isShaking
-          ? "shaking"
-          : "idle"
-      }
+      animate={isAttacking ? attackAnimate : isShaking ? "shaking" : "idle"}
       exit="exit"
+      style={
+        isAttacking
+          ? ({ "--card-image": `url(${card.imageUrl})`, zIndex: 999 } as CSSProperties)
+          : ({ "--card-image": `url(${card.imageUrl})` } as CSSProperties)
+      }
       whileHover={
-        !isOpponent && !isDisabled
+        !isAttacking && !isOpponent && !isDisabled
           ? {
               scale: 1.2,
               y: -85,
               zIndex: 3,
               transition: { duration: 0.1 },
             }
-          : { scale: 1.2, transition: { duration: 0.1 } }
+          : !isAttacking
+          ? { scale: 1.2, transition: { duration: 0.1 } }
+          : {}
       }
-      whileTap={{ scale: 0.9 }}
+      whileTap={!isAttacking ? { scale: 0.9 } : {}}
       className={clsx(styles.card, {
         [styles.canAttack]: isReadyToAttack,
       })}
       data-facedown={isFaceDown}
       onClick={onClick}
       disabled={isDisabled}
-      style={
-        {
-          "--card-image": `url(${card.imageUrl})`,
-        } as CSSProperties
-      }
     >
       <div className={clsx(styles.cardArt)}>
         <span

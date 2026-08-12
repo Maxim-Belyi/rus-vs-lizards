@@ -1,12 +1,13 @@
 import { createContext, useContext, useRef } from "react";
-import type { RefObject, ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { TPlayer } from "../store/game.types";
 
-type HeroRefsMap = Map<TPlayer, RefObject<HTMLDivElement>>;
+// Use a simple map from player key to DOM element ref
+type HeroRefsMap = Map<TPlayer, { current: HTMLDivElement | null }>;
 
 interface HeroRefsContextType {
-  registerHeroRef: (player: TPlayer, ref: RefObject<HTMLDivElement>) => void;
-  getHeroRef: (player: TPlayer) => RefObject<HTMLDivElement> | undefined;
+  registerHeroRef: (player: TPlayer, ref: { current: HTMLDivElement | null }) => void;
+  getHeroRef: (player: TPlayer) => { current: HTMLDivElement | null } | undefined;
 }
 
 export const HeroRefsContext = createContext<HeroRefsContextType>({
@@ -17,7 +18,7 @@ export const HeroRefsContext = createContext<HeroRefsContextType>({
 export function HeroRefsProvider({ children }: { children: ReactNode }) {
   const heroRefsMapRef = useRef<HeroRefsMap>(new Map());
 
-  const registerHeroRef = (player: TPlayer, ref: RefObject<HTMLDivElement>) => {
+  const registerHeroRef = (player: TPlayer, ref: { current: HTMLDivElement | null }) => {
     heroRefsMapRef.current.set(player, ref);
   };
 
