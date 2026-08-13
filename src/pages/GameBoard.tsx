@@ -87,6 +87,13 @@ function GameBoardInner() {
   const handleHeroAttack = () => {
     if (currentTurn !== "player" || !selectedCardId) return;
 
+    // Guard: check that the attacker card can actually attack
+    const attackerCard = player.field.find((c) => c.id === selectedCardId);
+    if (!attackerCard || !attackerCard.isCanAttack) {
+      setSelectedCard(null);
+      return;
+    }
+
     const attackerRef = getCardRef(selectedCardId);
     const heroRef = getHeroRef("opponent");
 
@@ -118,6 +125,13 @@ function GameBoardInner() {
       setSelectedCard(clickedCardId);
     } else {
       if (!selectedCardId) return;
+
+      // Guard: check that the attacker card can actually attack before playing animation
+      const attackerCard = player.field.find((c) => c.id === selectedCardId);
+      if (!attackerCard || !attackerCard.isCanAttack) {
+        setSelectedCard(null);
+        return;
+      }
 
       const attackerRef = getCardRef(selectedCardId);
       const targetRef = getCardRef(clickedCardId);

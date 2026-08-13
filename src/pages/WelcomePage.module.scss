@@ -5,66 +5,80 @@
   flex-direction: column;
   align-items: center;
   max-height: 85vh;
-  width: 90vw;
   padding: rem(30) rem(20);
-  background: 
+  background:
     url("/assets/taunt-shield.avif") center/cover no-repeat;
   border-radius: var(--border-radius);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(14px);
   color: #fff;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+
+  @media (max-height: 600px) {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
 }
 
 .title {
   font-size: fluid(62, 28);
-  color: var(--dark-red);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 16px rgba(173, 44, 44, 0.6);
-  margin-bottom: rem(40);
+  color: var( --dark-red);
+  text-shadow:
+    2px 2px 0 #1a0808,
+    0 0 24px rgba(220, 60, 20, 0.7),
+    0 0 48px rgba(78, 20, 10, 0.35);
+  margin-bottom: rem(32);
   text-align: center;
   letter-spacing: 8px;
 
   @media (max-height: 600px) {
     font-size: rem(28);
-    margin-bottom: rem(20);
+    margin-bottom: rem(16);
   }
 }
 
 .rulesContainer {
-  background: rgba(32, 32, 78, 0.85);
-  border-radius: var(--border-radius);
-  padding: rem(20);
+  background: linear-gradient(
+    160deg,
+    rgba(18, 10, 30, 0.92) 0%,
+    rgba(28, 18, 50, 0.88) 100%
+  );
+  border-radius: rem(14);
+  border: 1px solid rgba(180, 120, 40, 0.3);
+  padding: rem(24) rem(28);
   max-width: rem(800);
   width: 100%;
-  margin-bottom: rem(40);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.5);
+  margin-bottom: rem(32);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 200, 80, 0.05);
 
   @media (max-height: 600px) {
-    padding: rem(12);
-    margin-bottom: rem(20);
+    padding: rem(12) rem(16);
+    margin-bottom: rem(16);
   }
 
   .objective {
-    font-size: fluid(24, 12);
-    color: #fcf2d9;
+    font-size: fluid(18, 12);
+    color: rgba(255, 240, 200, 0.9);
     text-align: center;
-    margin-bottom: rem(32);
-    font-family: var(--ff-accent);
-    letter-spacing: 2px;
-    line-height: 1.4;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: rem(24);
+    margin-bottom: rem(24);
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid rgba(180, 130, 50, 0.35);
+    padding-bottom: rem(20);
   }
 
   h2 {
-    color: var(--yellow);
-    font-size: fluid(32, 12);
-    margin-bottom: rem(24);
+    color: #f0c040;
+    font-size: fluid(28, 14);
+    margin-bottom: rem(20);
     text-align: center;
-    text-shadow: var(--text-shadow-alt);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 16px rgba(240, 180, 30, 0.3);
     letter-spacing: 6px;
   }
 }
@@ -74,65 +88,89 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: rem(20);
+  gap: rem(12);
 }
 
 .mechanicItem {
   display: flex;
   align-items: center;
-  gap: rem(24);
-  background: rgba(255, 255, 255, 0.05);
-  padding: rem(24) rem(24);
-  border-radius: rem(12);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.2s, background 0.2s;
+  gap: rem(18);
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  padding: rem(16) rem(20);
+  border-radius: rem(10);
+  border: 1px solid rgba(180, 130, 50, 0.2);
+  border-left: 3px solid rgba(220, 160, 40, 0.6);
+  transition: background 0.2s, border-color 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-2px);
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    border-left-color: rgba(240, 190, 60, 0.9);
   }
 
   h3 {
-    color: var(--yellow);
-    font-size: fluid(22, 16);
-    margin-bottom: rem(6);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    letter-spacing: 2px;
-    font-family:var(--ff-accent);
+    color: #f5c842;
+    font-size: fluid(18, 13);
+    margin-bottom: rem(4);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1px;
+    font-family: var(--ff-accent);
   }
 
   p {
-    font-size: fluid(18, 8);
-    color: #fcf2d9;
-    line-height: 1.5;
+    font-size: fluid(16, 11);
+    color: rgba(240, 230, 210, 0.92);
+    line-height: 1.55;
     margin: 0;
-    font-family:var(--ff-accent);
-    letter-spacing: 2px;
+    font-family: Georgia, "Times New Roman", serif;
+    letter-spacing: 0.2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   }
 }
 
 .mechanicIcon {
-  width: fluid(72, 48);
-  height: fluid(72, 48);
+  width: fluid(64, 40);
+  height: fluid(64, 40);
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
   flex-shrink: 0;
 
   @media (max-height: 600px) {
-    width: rem(40);
-    height: rem(40);
+    width: rem(36);
+    height: rem(36);
   }
 }
 
 .startButton {
-  font-size: fluid(26, 12) !important;
-  padding: rem(16) rem(56) !important;
-  box-shadow: 0 4px 16px rgba(173, 44, 44, 0.4);
+  font-size: fluid(24, 14) !important;
+  padding: rem(14) rem(52) !important;
+  background: linear-gradient(135deg, #9b1515 0%, #6e0c0c 100%) !important;
+  border: 1px solid rgba(220, 100, 60, 0.4) !important;
+  box-shadow:
+    0 4px 0 #3d0808,
+    0 6px 20px rgba(150, 30, 20, 0.5) !important;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  
+  letter-spacing: 3px;
+  color: #fae8c0 !important;
+  transition: all 0.2s ease !important;
+
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 24px rgba(173, 44, 44, 0.7);
+    transform: translateY(-3px) !important;
+    background: linear-gradient(135deg, #b81a1a 0%, #831010 100%) !important;
+    box-shadow:
+      0 7px 0 #3d0808,
+      0 10px 28px rgba(180, 40, 20, 0.7) !important;
+  }
+
+  &:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 0 #3d0808, 0 4px 12px rgba(150, 30, 20, 0.4) !important;
   }
 }
