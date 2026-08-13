@@ -9,6 +9,7 @@ import { CardRefsProvider, useCardRefs } from "../context/CardRefsContext";
 import { HeroRefsProvider, useHeroRefs } from "../context/HeroRefsContext";
 import { useState } from "react";
 import type { IAttackAnimation } from "../store/game.types";
+import { EnumTypeCard } from "../constants/constants";
 
 const ATTACK_DURATION_MS = 1000; // matches ATTACK_DURATION in CardDisplay (1 second)
 
@@ -44,18 +45,17 @@ function GameBoardInner() {
     setShakingCard,
     setAttackAnimation,
     notification,
+    notify,
   } = useGameStore();
 
   const { getCardRef } = useCardRefs();
   const { getHeroRef } = useHeroRefs();
 
-  // Helper getters for DOM elements to pass to runOpponentTurnAction
   const getCardEl = (id: string): HTMLElement | null =>
     getCardRef(id)?.current ?? null;
   const getHeroEl = (key: "player" | "opponent"): HTMLElement | null =>
     getHeroRef(key)?.current ?? null;
 
-  // Local state for pending attack while animation plays
   const [pendingAttack, setPendingAttack] = useState<{
     attackerId: string;
     targetCardId: string | null; // null = hero
@@ -68,7 +68,6 @@ function GameBoardInner() {
   ) => {
     setAttackAnimation(anim);
 
-    // After animation completes, apply the actual damage
     setTimeout(() => {
       setAttackAnimation(null);
       if (targetId !== null) {
@@ -87,9 +86,17 @@ function GameBoardInner() {
   const handleHeroAttack = () => {
     if (currentTurn !== "player" || !selectedCardId) return;
 
-    // Guard: check that the attacker card can actually attack
     const attackerCard = player.field.find((c) => c.id === selectedCardId);
     if (!attackerCard || !attackerCard.isCanAttack) {
+      setSelectedCard(null);
+      return;
+    }
+
+    const opponentHasTaunt = opponent.field.some(
+      (c) => c.type === EnumTypeCard.TAUNT
+    );
+    if (opponentHasTaunt) {
+      notify("Атакуйте существо с `Провокацией`");
       setSelectedCard(null);
       return;
     }
